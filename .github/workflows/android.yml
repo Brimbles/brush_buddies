@@ -29,7 +29,20 @@ jobs:
         with:
           gradle-version: '8.9'
 
+      - name: Unpack signing key
+        env:
+          BB_KEYSTORE_BASE64: ${{ secrets.BB_KEYSTORE_BASE64 }}
+        run: |
+          if [ -z "$BB_KEYSTORE_BASE64" ]; then
+            echo "::error::Add the BB_KEYSTORE_BASE64 and BB_KEYSTORE_PASSWORD repository secrets first."
+            exit 1
+          fi
+          echo "$BB_KEYSTORE_BASE64" | base64 -d > "$RUNNER_TEMP/brushbuddies.keystore"
+          echo "BB_KEYSTORE_PATH=$RUNNER_TEMP/brushbuddies.keystore" >> "$GITHUB_ENV"
+
       - name: Build APK
+        env:
+          BB_KEYSTORE_PASSWORD: ${{ secrets.BB_KEYSTORE_PASSWORD }}
         run: gradle -p android assembleRelease -PversionCode=${{ github.run_number }}
 
       - name: Rename APK

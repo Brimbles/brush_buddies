@@ -18,6 +18,6 @@ To install on a phone:
 2. Open the downloaded file. Android will ask you to allow installing apps from your browser or Files app; allow it once.
 3. Later builds install over the top as updates.
 
-The app runs fully offline. The signing key (`android/app/brushbuddies.keystore`) is committed on purpose so every build is signed the same way and updates install cleanly; it is only for this family app, not for the Play Store.
+The app runs fully offline. Builds are signed with a key kept in the repository secrets `BB_KEYSTORE_BASE64` (the keystore, base64-encoded) and `BB_KEYSTORE_PASSWORD`, so every build is signed the same way and updates install cleanly. The key is never committed.
 
 Fonts: Lilita One and Nunito, bundled under the SIL Open Font License.
