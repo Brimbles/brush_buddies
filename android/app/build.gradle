@@ -1,0 +1,46 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'uk.brimbles.brushbuddies'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId 'uk.brimbles.brushbuddies'
+        minSdk 24
+        targetSdk 34
+        // CI passes the build number so every APK installs as an update over the last one
+        versionCode((project.findProperty('versionCode') ?: '1') as int)
+        versionName "1.${versionCode}"
+    }
+
+    signingConfigs {
+        // A fixed family key: every build is signed the same way, so new APKs update the old one in place.
+        family {
+            storeFile file('brushbuddies.keystore')
+            storePassword 'brushbuddies'
+            keyAlias 'brushbuddies'
+            keyPassword 'brushbuddies'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.family
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+// The app is the same index.html as the web version: copy it in at build time.
+tasks.register('copyWeb', Copy) {
+    from rootProject.file('../index.html')
+    into 'src/main/assets'
+}
+preBuild.dependsOn copyWeb

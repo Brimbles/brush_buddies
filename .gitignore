@@ -1,0 +1,6 @@
+# copied in from the repo root at build time
+android/app/src/main/assets/index.html
+android/.gradle/
+android/build/
+android/app/build/
+android/local.properties

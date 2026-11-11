@@ -8,3 +8,16 @@ A 30-second toothbrush timer for kids. Pick a buddy, tap **Start!**, and it danc
 - The screen stays on while the timer runs
 
 It is a single self-contained file: open `index.html` in a browser.
+
+## Android app
+
+Every change to `index.html` (or the `android/` folder) on `main` builds a new APK with GitHub Actions and publishes it under **Releases**.
+
+To install on a phone:
+1. Open the latest release on the phone (signed in to GitHub, since the repo is private) and download `BrushBuddies.apk`.
+2. Open the downloaded file. Android will ask you to allow installing apps from your browser or Files app; allow it once.
+3. Later builds install over the top as updates.
+
+The app runs fully offline. The signing key (`android/app/brushbuddies.keystore`) is committed on purpose so every build is signed the same way and updates install cleanly; it is only for this family app, not for the Play Store.
+
+Fonts: Lilita One and Nunito, bundled under the SIL Open Font License.
