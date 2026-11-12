@@ -201,6 +201,8 @@ h1 { font-family: var(--display); font-weight: 400; font-size: 1.6rem; margin: 0
 .elephant .trunk { transform-origin: 30% 0%; transition: transform .35s ease; }
 .stage.t-spray .elephant .trunk { transform: rotate(-125deg); }
 
+.stage.t-drums .octopus .tent { transform-origin: 50% 0%; animation: wig .16s ease-in-out infinite; }
+
 @media (prefers-reduced-motion: reduce) {
   .animal, .animal * { animation-duration: calc(var(--beat) * 4) !important; }
   .confetti { display: none; }
@@ -249,7 +251,7 @@ const cheeks = (y, l = 70, r = 130, rr = 8) => `<circle cx="${l}" cy="${y}" r="$
 const eyes = (y, l = 80, r = 120, rr = 7) => `<circle cx="${l}" cy="${y}" r="${rr}" fill="${D}"/><circle cx="${r}" cy="${y}" r="${rr}" fill="${D}"/><circle cx="${l + 2}" cy="${y - 3}" r="2.3" fill="#fff"/><circle cx="${r + 2}" cy="${y - 3}" r="2.3" fill="#fff"/>`;
 
 const ANIMALS = {
-  lion: { name: 'Lion', song: 'Jungle Stomp', mouth: [100, 138], roar: 'ROAR!', tricks: ['roar', 'backflip', 'spin'], svg: `
+  lion: { name: 'Lion', song: 'Jungle Stomp', mouth: [100, 138], roar: 'ROAR!', tricks: ['roar', 'backflip', 'spin', 'crown', 'shades', 'brush'], svg: `
     <g class="animal lion">
       <circle class="mane" cx="100" cy="102" r="74" fill="#E8762B" stroke="#E8762B" stroke-width="16" stroke-dasharray="16 9" stroke-linecap="round"/>
       <circle cx="56" cy="56" r="17" fill="#F5B53D"/><circle cx="56" cy="56" r="8" fill="#E8762B"/>
@@ -260,7 +262,7 @@ const ANIMALS = {
       <path d="M89 120 h22 l-11 11 z" fill="#6B3B22" stroke="#6B3B22" stroke-width="3" stroke-linejoin="round"/>
       <path d="M100 131 v6 M87 139 q13 11 26 0" stroke="#6B3B22" stroke-width="4" fill="none" stroke-linecap="round"/>
     </g>` },
-  penguin: { name: 'Penguin', song: 'Ice Slide', mouth: [100, 96], tricks: ['fish', 'slide'], svg: `
+  penguin: { name: 'Penguin', song: 'Ice Slide', mouth: [100, 96], tricks: ['fish', 'slide', 'snowball', 'disco'], svg: `
     <g class="animal penguin">
       <ellipse cx="78" cy="184" rx="17" ry="7" fill="#F59E2B"/><ellipse cx="122" cy="184" rx="17" ry="7" fill="#F59E2B"/>
       <path class="fl-l" d="M52 100 q-26 32 -12 66 q16 -10 20 -46 z" fill="#1E2A3A"/>
@@ -272,7 +274,7 @@ const ANIMALS = {
       <path d="M89 91 q11 16 22 0 z" fill="#F59E2B" stroke="#F59E2B" stroke-width="3" stroke-linejoin="round"/>
       <path d="M78 112 l22 8 l22 -8 l-4 14 l-18 -6 l-18 6 z" fill="#FF5D73"/>
     </g>` },
-  frog: { name: 'Frog', song: 'Lily Pad Hop', mouth: [100, 116], tricks: ['backflip', 'fly'], svg: `
+  frog: { name: 'Frog', song: 'Lily Pad Hop', mouth: [100, 116], tricks: ['backflip', 'fly', 'pond', 'croak'], svg: `
     <g class="animal frog">
       <ellipse cx="52" cy="176" rx="28" ry="12" fill="#4E9A33"/><ellipse cx="148" cy="176" rx="28" ry="12" fill="#4E9A33"/>
       <ellipse cx="100" cy="142" rx="58" ry="42" fill="#6CC24A"/>
@@ -285,7 +287,7 @@ const ANIMALS = {
       ${cheeks(108, 50, 150, 10)}
       <path d="M60 106 q40 32 80 0" stroke="#2D5A1E" stroke-width="5" fill="none" stroke-linecap="round"/>
     </g>` },
-  elephant: { name: 'Elephant', song: 'Trumpet Parade', mouth: [104, 130], tricks: ['spray', 'spin'], svg: `
+  elephant: { name: 'Elephant', song: 'Trumpet Parade', mouth: [104, 130], tricks: ['spray', 'spin', 'mouse', 'peanut'], svg: `
     <g class="animal elephant">
       <g class="ear-l"><ellipse cx="46" cy="100" rx="40" ry="50" fill="#9AA9BC"/><ellipse cx="50" cy="100" rx="25" ry="34" fill="#F2B8C6"/></g>
       <g class="ear-r"><ellipse cx="154" cy="100" rx="40" ry="50" fill="#9AA9BC"/><ellipse cx="150" cy="100" rx="25" ry="34" fill="#F2B8C6"/></g>
@@ -296,7 +298,7 @@ const ANIMALS = {
       <path d="M80 126 q-4 12 6 16" stroke="#fff" stroke-width="6" fill="none" stroke-linecap="round"/>
       <path d="M120 126 q4 12 -6 16" stroke="#fff" stroke-width="6" fill="none" stroke-linecap="round"/>
     </g>` },
-  octopus: { name: 'Octopus', song: 'Bubble Wobble', mouth: [100, 116], tricks: ['juggle', 'bubbles'], svg: `
+  octopus: { name: 'Octopus', song: 'Bubble Wobble', mouth: [100, 116], tricks: ['juggle', 'bubbles', 'ink', 'drums'], svg: `
     <g class="animal octopus">
       <g stroke="#9B5DE5" stroke-width="16" fill="none" stroke-linecap="round">
         <path class="tent" d="M52 118 q-16 30 4 60"/><path class="tent" d="M72 126 q-8 30 2 62"/>
@@ -309,7 +311,7 @@ const ANIMALS = {
       ${eyes(92)}${cheeks(110, 62, 138)}
       <path d="M86 114 q14 12 28 0" stroke="${D}" stroke-width="4.5" fill="none" stroke-linecap="round"/>
     </g>` },
-  unicorn: { name: 'Unicorn', song: 'Rainbow Gallop', mouth: [100, 150], tricks: ['rainbow', 'bighop'], svg: `
+  unicorn: { name: 'Unicorn', song: 'Rainbow Gallop', mouth: [100, 150], tricks: ['rainbow', 'bighop', 'cupcake', 'twinkle'], svg: `
     <g class="animal unicorn">
       <circle cx="58" cy="70" r="20" fill="#FFD36E"/><circle cx="50" cy="100" r="22" fill="#FF9EC7"/>
       <circle cx="56" cy="132" r="20" fill="#B794F6"/><circle cx="68" cy="160" r="16" fill="#7FD3F7"/>
@@ -326,7 +328,7 @@ const ANIMALS = {
       <circle cx="90" cy="136" r="3.5" fill="#E58BB4"/><circle cx="110" cy="136" r="3.5" fill="#E58BB4"/>
       <path d="M90 148 q10 8 20 0" stroke="${D}" stroke-width="4" fill="none" stroke-linecap="round"/>
     </g>` },
-  dragon: { name: 'Dragon', song: 'Dragon Dance', mouth: [100, 114], tricks: ['fire', 'flyup'], svg: `
+  dragon: { name: 'Dragon', song: 'Dragon Dance', mouth: [100, 114], tricks: ['fire', 'flyup', 'treasure', 'marshmallow'], svg: `
     <g class="animal dragon">
       <path class="wing-l" d="M58 120 L10 66 L22 104 L4 118 L22 124 L12 140 L56 140 z" fill="#2BB39A" stroke="#1F8F7B" stroke-width="3" stroke-linejoin="round"/>
       <path class="wing-r" d="M142 120 L190 66 L178 104 L196 118 L178 124 L188 140 L144 140 z" fill="#2BB39A" stroke="#1F8F7B" stroke-width="3" stroke-linejoin="round"/>
@@ -342,7 +344,7 @@ const ANIMALS = {
       <path d="M80 110 q20 14 40 0" stroke="${D}" stroke-width="4.5" fill="none" stroke-linecap="round"/>
       <path d="M86 113 l3 5 l3 -4 M108 113 l3 5 l3 -5" stroke="#fff" stroke-width="2.5" fill="#fff" stroke-linejoin="round"/>
     </g>` },
-  hobbit: { name: 'Hobbit', song: 'Hills and Hobbit-holes', mouth: [100, 97], tricks: ['ring', 'adventure', 'fireworks', 'home', 'pie', 'pipe'], svg: `
+  hobbit: { name: 'Hobbit', song: 'Hills and Hobbit-holes', mouth: [100, 97], tricks: ['ring', 'adventure', 'fireworks', 'home', 'pie', 'pipe', 'mushroom'], svg: `
     <g class="animal hobbit">
       <g class="foot-l"><ellipse cx="80" cy="182" rx="19" ry="9" fill="#F2C097"/><circle cx="72" cy="176" r="4" fill="#7A4A26"/><circle cx="80" cy="174" r="4" fill="#7A4A26"/><circle cx="88" cy="176" r="4" fill="#7A4A26"/></g>
       <g class="foot-r"><ellipse cx="120" cy="182" rx="19" ry="9" fill="#F2C097"/><circle cx="112" cy="176" r="4" fill="#7A4A26"/><circle cx="120" cy="174" r="4" fill="#7A4A26"/><circle cx="128" cy="176" r="4" fill="#7A4A26"/></g>
@@ -359,7 +361,7 @@ const ANIMALS = {
       ${eyes(80, 88, 112, 4.8)}${cheeks(92, 76, 124, 6)}
       <path d="M90 95 q10 8 20 0" stroke="#7A3B22" stroke-width="4" fill="none" stroke-linecap="round"/>
     </g>` },
-  dino: { name: 'Dinosaur', song: 'Dino Island', mouth: [100, 118], roar: 'RAWR!', tricks: ['jeep', 'fence', 'lawyer', 'roar'], svg: `
+  dino: { name: 'Dinosaur', song: 'Dino Island', mouth: [100, 118], roar: 'RAWR!', tricks: ['jeep', 'fence', 'lawyer', 'roar', 'egg', 'brush'], svg: `
     <g class="animal dino">
       <path d="M66 52 l8 -18 l8 16 z M84 44 l8 -20 l8 18 z M104 44 l8 -20 l8 20 z M122 50 l8 -16 l6 18 z" fill="#FF9A3D"/>
       <ellipse cx="78" cy="182" rx="17" ry="8" fill="#5DBB3A"/><ellipse cx="122" cy="182" rx="17" ry="8" fill="#5DBB3A"/>
@@ -374,7 +376,7 @@ const ANIMALS = {
       <path d="M70 110 q30 26 60 0 z" fill="#fff" stroke="${D}" stroke-width="4" stroke-linejoin="round"/>
       <path d="M78 112 l4 6 l4 -6 M114 112 l4 6 l4 -6" stroke="${D}" stroke-width="2" fill="none"/>
     </g>` },
-  monkey: { name: 'Monkey', song: 'Banana Bounce', mouth: [100, 126], tricks: ['banana', 'cartwheel'], svg: `
+  monkey: { name: 'Monkey', song: 'Banana Bounce', mouth: [100, 126], tricks: ['banana', 'cartwheel', 'vine', 'coconut'], svg: `
     <g class="animal monkey">
       <path d="M140 160 q40 10 34 -30 q-4 -16 -14 -8" stroke="#8B5A3C" stroke-width="9" fill="none" stroke-linecap="round"/>
       <ellipse cx="100" cy="162" rx="36" ry="26" fill="#8B5A3C"/><ellipse cx="100" cy="166" rx="20" ry="16" fill="#F2C9A0"/>
@@ -389,7 +391,7 @@ const ANIMALS = {
       <circle cx="95" cy="108" r="2.6" fill="#6E4329"/><circle cx="105" cy="108" r="2.6" fill="#6E4329"/>
       <path d="M84 120 q16 14 32 0" stroke="${D}" stroke-width="4.5" fill="none" stroke-linecap="round"/>
     </g>` },
-  bunny: { name: 'Bunny', song: 'Carrot Hop', mouth: [100, 134], tricks: ['carrot', 'bighop'], svg: `
+  bunny: { name: 'Bunny', song: 'Carrot Hop', mouth: [100, 134], tricks: ['carrot', 'bighop', 'hole', 'hat'], svg: `
     <g class="animal bunny">
       <g class="ear-l"><ellipse cx="78" cy="42" rx="14" ry="38" fill="#fff" stroke="#EADFE6" stroke-width="3"/><ellipse cx="78" cy="44" rx="7" ry="28" fill="#FFB3C7"/></g>
       <g class="ear-r"><ellipse cx="122" cy="42" rx="14" ry="38" fill="#fff" stroke="#EADFE6" stroke-width="3"/><ellipse cx="122" cy="44" rx="7" ry="28" fill="#FFB3C7"/></g>
@@ -403,7 +405,7 @@ const ANIMALS = {
       <path d="M100 133 v9" stroke="${D}" stroke-width="1.5"/>
       <path d="M60 120 h-20 M60 126 l-18 6 M140 120 h20 M140 126 l18 6" stroke="#C9B8C6" stroke-width="2" stroke-linecap="round"/>
     </g>` },
-  robot: { name: 'Robot', song: 'Cyborg Patrol', mouth: [100, 100], tricks: ['beep', 'spin'], svg: `
+  robot: { name: 'Robot', song: 'Cyborg Patrol', mouth: [100, 100], tricks: ['beep', 'spin', 'oil', 'disco'], svg: `
     <g class="animal robot">
       <path d="M100 46 V28" stroke="#6D8299" stroke-width="4"/><circle class="light" cx="100" cy="24" r="7" fill="#FF5D73"/>
       <rect x="66" y="128" width="68" height="46" rx="12" fill="#9FB4C7" stroke="#6D8299" stroke-width="4"/>
@@ -440,7 +442,7 @@ const ANIMALS = {
       <path d="M100 114 v4 M92 120 q8 5 8 -2 q0 7 8 2" stroke="#8A7F78" stroke-width="2.5" fill="none" stroke-linecap="round"/>
       <path d="M78 116 L40 108 M78 120 L38 124 M122 116 L160 108 M122 120 L162 124" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/>
     </g>` },
-  bjork: { name: 'Bjork', song: 'Glacier Lullaby', mouth: [100, 120], tricks: ['loaf', 'yarn'], svg: `
+  bjork: { name: 'Bjork', song: 'Glacier Lullaby', mouth: [100, 120], tricks: ['loaf', 'yarn', 'box', 'laser'], svg: `
     <g class="animal bjork">
       <path d="M146 172 q36 2 32 -36" stroke="#E8B47A" stroke-width="13" fill="none" stroke-linecap="round"/>
       <ellipse cx="100" cy="154" rx="56" ry="32" fill="#E8B47A"/>
@@ -461,7 +463,7 @@ const ANIMALS = {
       <path d="M100 115 v3 M90 118 q5 7 10 0 q5 7 10 0" stroke="#B98A6A" stroke-width="3" fill="none" stroke-linecap="round"/>
       <path d="M78 116 L40 110 M78 121 L40 126 M122 116 L160 110 M122 121 L160 126" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/>
     </g>` },
-  mermaid: { name: 'Mermaid', song: 'Coral Lullaby', mouth: [100, 88], tricks: ['bubbles', 'backflip'], svg: `
+  mermaid: { name: 'Mermaid', song: 'Coral Lullaby', mouth: [100, 88], tricks: ['bubbles', 'backflip', 'dolphin', 'sing'], svg: `
     <g class="animal mermaid">
       <path d="M58 76 Q52 40 100 34 Q148 40 142 76 Q150 120 128 136 L72 136 Q50 120 58 76z" fill="#5B4BC4"/>
       <path d="M78 120 Q70 160 96 174 Q84 184 66 190 Q94 196 104 182 Q114 196 138 190 Q118 182 108 172 Q132 150 122 120 Z" fill="#2EC4B6"/>
@@ -476,7 +478,7 @@ const ANIMALS = {
       ${eyes(76, 89, 111, 4.6)}${cheeks(84, 82, 118, 5)}
       <path d="M92 87 q8 7 16 0" stroke="#5A2E1E" stroke-width="3.5" fill="none" stroke-linecap="round"/>
     </g>` },
-  shark: { name: 'Shark', song: 'Surf Chomp', mouth: [100, 130], roar: 'CHOMP!', tricks: ['fish', 'roar'], svg: `
+  shark: { name: 'Shark', song: 'Surf Chomp', mouth: [100, 130], roar: 'CHOMP!', tricks: ['fish', 'roar', 'brush', 'surf'], svg: `
     <g class="animal shark">
       <path d="M84 56 L106 8 L124 56z" fill="#5A88B6"/>
       <path d="M90 170 L70 196 L100 186 L130 196 L110 170 z" fill="#5A88B6"/>
@@ -489,7 +491,7 @@ const ANIMALS = {
       <path d="M68 118 Q100 156 132 118 Q100 132 68 118z" fill="#8B2E4A" stroke="${D}" stroke-width="3" stroke-linejoin="round"/>
       <path d="M74 121 l5 7 l5 -5 l5 7 l5 -6 l6 7 l6 -7 l5 6 l5 -7 l5 5 l5 -7" fill="#fff" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/>
     </g>` },
-  fairy: { name: 'Fairy', song: 'Twinkle Dust', mouth: [100, 90], tricks: ['wand', 'flyup'], svg: `
+  fairy: { name: 'Fairy', song: 'Twinkle Dust', mouth: [100, 90], tricks: ['wand', 'flyup', 'flowers', 'disco'], svg: `
     <g class="animal fairy">
       <g class="wing-l"><ellipse cx="62" cy="96" rx="34" ry="22" transform="rotate(-28 62 96)" fill="#BFE9FF" fill-opacity=".9" stroke="#8FD3F5" stroke-width="3"/><ellipse cx="68" cy="132" rx="22" ry="13" transform="rotate(24 68 132)" fill="#E3CCFF" fill-opacity=".9" stroke="#B794F6" stroke-width="3"/></g>
       <g class="wing-r"><ellipse cx="138" cy="96" rx="34" ry="22" transform="rotate(28 138 96)" fill="#BFE9FF" fill-opacity=".9" stroke="#8FD3F5" stroke-width="3"/><ellipse cx="132" cy="132" rx="22" ry="13" transform="rotate(-24 132 132)" fill="#E3CCFF" fill-opacity=".9" stroke="#B794F6" stroke-width="3"/></g>
@@ -521,6 +523,10 @@ const AN = (attr, p, d) => `<animate attributeName="${attr}" ${kv(p)} dur="${d}s
 const at = (x, y, inner) => `<g transform="translate(${x} ${y})"><g>${inner}</g></g>`;
 
 const FOOD = {
+  peanut: `<path d="M-14 -4 q-2 -12 10 -12 q8 0 8 8 q4 -4 10 -2 q10 4 6 14 q-4 10 -16 6 q-4 6 -12 4 q-10 -4 -6 -18z" fill="#E0B87A" stroke="#B98A4A" stroke-width="2"/><path d="M-8 -6 l3 2 M4 4 l3 2" stroke="#B98A4A" stroke-width="1.5"/>`,
+  cupcake: `<path d="M-14 0 L14 0 L10 18 L-10 18 Z" fill="#FF8FC8" stroke="#E05BB5" stroke-width="2"/><path d="M-8 0 l2 18 M0 0 v18 M8 0 l-2 18" stroke="#E05BB5" stroke-width="1.5"/><path d="M-17 2 Q-18 -10 -6 -10 Q-4 -20 6 -16 Q16 -14 14 -6 Q20 -2 16 2 Z" fill="#FFF8F0" stroke="#EADCF2" stroke-width="2"/><circle cx="2" cy="-18" r="4" fill="#FF5D73"/><circle cx="-8" cy="-4" r="1.5" fill="#4FA8F0"/><circle cx="6" cy="-6" r="1.5" fill="#FFD23F"/>`,
+  mushroom: `<rect x="-5" y="-2" width="10" height="16" rx="4" fill="#F4EBD8" stroke="#D8C7A8" stroke-width="1.5"/><path d="M-18 0 Q-18 -18 0 -18 Q18 -18 18 0 Z" fill="#E0453A" stroke="#B5322A" stroke-width="2"/><circle cx="-8" cy="-8" r="2.5" fill="#fff"/><circle cx="6" cy="-11" r="3" fill="#fff"/><circle cx="10" cy="-3" r="2" fill="#fff"/>`,
+  oilcan: `<rect x="-12" y="-10" width="24" height="26" rx="4" fill="#8A97A6" stroke="#5E6B7A" stroke-width="2"/><path d="M-12 -4 L-28 -16" stroke="#5E6B7A" stroke-width="4" stroke-linecap="round"/><path d="M8 -10 v-6 h-8 v6" stroke="#5E6B7A" stroke-width="2.5" fill="none"/><text x="0" y="8" text-anchor="middle" style="font: 9px 'Lilita One', 'Lilita Local', sans-serif; fill: #FFD23F;">OIL</text><circle cx="-30" cy="-12" r="2.5" fill="#3A3A3A"/>`,
   fish: `<ellipse rx="17" ry="9" fill="#7FB8E8"/><path d="M14 0 l13 -10 v20 z" fill="#5C9BD1"/><circle cx="-8" cy="-2" r="2.2" fill="${D}"/><path d="M-2 -6 q3 6 0 12" stroke="#5C9BD1" stroke-width="2" fill="none"/>`,
   pie: `<path d="M-24 2 h48 l-5 12 h-38 z" fill="#B97A3A"/><path d="M-24 2 Q0 -18 24 2 z" fill="#E8B26A"/><path d="M-12 -4 l4 -3 M0 -8 v-3 M12 -4 l-4 -3" stroke="#B97A3A" stroke-width="2.5" stroke-linecap="round"/><circle cx="-5" cy="-1" r="2.5" fill="#C9473D"/><circle cx="7" cy="-2" r="2.5" fill="#C9473D"/>`,
   banana: `<path d="M-20 -10 q16 32 40 -2 q-20 16 -40 2 z" fill="#FFD84D" stroke="#E0B23A" stroke-width="2.5" stroke-linejoin="round"/><path d="M-20 -10 l-3 -4" stroke="#7A5A2A" stroke-width="4" stroke-linecap="round"/>`,
@@ -546,6 +552,21 @@ function bubbles(d, ox, oy, n = 7, t0 = .08, t1 = .92) {
       + `<circle r="${r}" fill="#fff" fill-opacity=".5" stroke="#6EC3F5" stroke-width="2.5">${AN('opacity', [[0, '0'], [st, '0'], [st + .02, '1'], [st + .26, '1'], [st + .3, '0'], [1, '0']], d)}</circle>`);
   }
   return s;
+}
+// a word that pops in at t0 and out at t1 (fractions of the trick)
+function popWord(d, t0, t1, x, y, text, size = 26) {
+  const p = [[0, '0'], [t0, '0'], [t0 + .04, '1.25'], [t0 + .08, '1'], [t1, '1']];
+  if (t1 + .04 < 1) p.push([t1 + .04, '0']); p.push([1, '0']);
+  return at(x, y, A('scale', p.map(([t, v]) => [+t.toFixed(3), v]), d) + `<text text-anchor="middle" dominant-baseline="middle" style="font: ${size}px 'Lilita One', 'Lilita Local', sans-serif; fill: ${D}; stroke: #fff; stroke-width: 6px; paint-order: stroke;">${text}</text>`);
+}
+// stars shooting out from one point
+function starBurst(d, x, y, t0 = .2) {
+  let b = '';
+  for (let i = 0; i < 10; i++) {
+    const ang = i * Math.PI / 5, ex = (x + Math.cos(ang) * 70).toFixed(0), ey = (y + Math.sin(ang) * 70).toFixed(0), s = t0 + (i % 3) * .05;
+    b += `<g>${A('translate', [[0, `${x} ${y}`], [s, `${x} ${y}`], [s + .4, `${ex} ${ey}`], [1, `${ex} ${ey}`]], d)}<path d="${STAR}" fill="${['#FFD23F', '#FF8FC8', '#7FD3F7', '#B794F6'][i % 4]}">${AN('opacity', [[0, '0'], [s, '0'], [s + .02, '1'], [s + .35, '1'], [s + .4, '0'], [1, '0']], d)}</path></g>`;
+  }
+  return b;
 }
 const word = (d, text, size = 34) => at(100, 30, A('scale', [[0, '0'], [.1, '0'], [.22, '1.25'], [.3, '1'], [.85, '1'], [1, '0']], d)
   + `<text text-anchor="middle" dominant-baseline="middle" style="font: ${size}px 'Lilita One', 'Lilita Local', sans-serif; fill: ${D}; stroke: #fff; stroke-width: 7px; paint-order: stroke;">${text}</text>`);
@@ -817,6 +838,242 @@ const TRICKS = {
         + A('rotate', [[0, '0'], [.16, '0'], [.18, '-6'], [.2, '0'], [.32, '0'], [.34, '-6'], [.36, '0'], [.46, '0'], [.48, '-6'], [.5, '0'], [.56, '0'], [.58, '14'], [.6, '0'], [.76, '0'], [.78, '10'], [.8, '0'], [.84, '10'], [.86, '0'], [1, '0']], d),
     };
   }},
+  /* ---------- lion ---------- */
+  crown: { dur: 3.2, sfx: 'royal', build: d => ({
+    front: at(100, 26, A('translate', [[0, '0 -90'], [.25, '0 0'], [.3, '0 -8'], [.35, '0 0'], [1, '0 0']], d) + AN('opacity', [[0, '1'], [.9, '1'], [1, '0']], d)
+      + `<path d="M-30 12 L-30 -14 L-15 0 L0 -22 L15 0 L30 -14 L30 12 Z" fill="#FFD23F" stroke="#D9A400" stroke-width="3" stroke-linejoin="round"/><circle cx="0" cy="2" r="4.5" fill="#FF5D73"/><circle cx="-18" cy="4" r="3" fill="#4FA8F0"/><circle cx="18" cy="4" r="3" fill="#5DCB6A"/>`)
+      + sparkles(d, .3, 1) + popWord(d, .4, .85, 160, 150, 'KING!', 26),
+    pivot: A('scale', [[0, '1'], [.3, '1'], [.4, '1.08'], [.85, '1.08'], [1, '1']], d),
+  }) },
+  shades: { dur: 3.2, sfx: 'cool', build: d => ({
+    front: at(100, 98, A('translate', [[0, '0 -140'], [.25, '0 0'], [1, '0 0']], d) + AN('opacity', [[0, '1'], [.9, '1'], [1, '0']], d)
+      + `<rect x="-36" y="-11" width="30" height="20" rx="8" fill="#1A1A1A"/><rect x="6" y="-11" width="30" height="20" rx="8" fill="#1A1A1A"/><path d="M-6 -4 h12" stroke="#1A1A1A" stroke-width="4"/><path d="M-30 -6 l8 -2 M12 -6 l8 -2" stroke="#fff" stroke-width="2.5" stroke-linecap="round" opacity=".7"/>`)
+      + popWord(d, .3, .88, 100, 30, 'COOL CAT!', 30),
+    pivot: A('rotate', [[0, '0'], [.3, '0'], [.4, '-6'], [.5, '6'], [.6, '-6'], [.7, '6'], [.8, '0'], [1, '0']], d),
+  }) },
+  brush: { dur: 3.8, sfx: 'scrub', build: (d, a) => {
+    const [mx, my] = a.mouth;
+    const scrub = [[0, '0 0']]; for (let t = .16, s = 1; t < .7; t += .04, s = -s) scrub.push([+t.toFixed(2), `${s * 10} 0`]); scrub.push([.72, '0 0'], [1, '0 0']);
+    let foam = '';
+    [[-18, -4, 7], [16, 2, 6], [-4, 10, 8], [24, -8, 5], [-26, 8, 5], [6, -12, 6]].forEach(([x, y, r], i) => {
+      const s = .2 + i * .06; foam += `<circle cx="${mx + x}" cy="${my + y}" r="${r}" fill="#fff" stroke="#BFE3F5" stroke-width="1.5">${AN('opacity', [[0, '0'], [s, '0'], [s + .03, '1'], [.74, '1'], [.8, '0'], [1, '0']], d)}</circle>`;
+    });
+    return {
+      front: foam + `<g>${A('translate', [[0, `${mx + 120} ${my}`], [.14, `${mx + 8} ${my}`], [.74, `${mx + 8} ${my}`], [.86, `${mx + 120} ${my}`], [1, `${mx + 120} ${my}`]], d)}${A('translate', scrub, d)}
+        <rect x="6" y="-5" width="80" height="10" rx="5" fill="#4FA8F0"/><rect x="-14" y="-7" width="24" height="12" rx="4" fill="#4FA8F0"/><path d="M-12 -7 v-8 M-6 -7 v-8 M0 -7 v-8 M6 -7 v-8" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/></g>`
+        + sparkles(d, .6, .95) + popWord(d, .76, .94, 100, 30, 'SPARKLY!', 30),
+      pivot: A('rotate', [[0, '0'], [.16, '0'], [.3, '-3'], [.45, '3'], [.6, '-3'], [.72, '0'], [1, '0']], d),
+    };
+  }},
+  /* ---------- penguin ---------- */
+  snowball: { dur: 3.2, sfx: 'splat', build: d => ({
+    front: `<circle r="12" fill="#fff" stroke="#BFD9EA" stroke-width="2">${A('translate', [[0, '-30 20'], [.15, '-30 20'], [.32, '100 74'], [1, '100 74']], d)}${AN('opacity', [[0, '1'], [.32, '1'], [.33, '0'], [1, '0']], d)}</circle>
+      <g>${AN('opacity', [[0, '0'], [.32, '0'], [.33, '1'], [.7, '1'], [.8, '0'], [1, '0']], d)}<path d="M100 54 q14 -6 18 8 q14 0 8 14 q10 10 -4 16 q-2 14 -16 8 q-10 10 -18 -2 q-16 2 -12 -12 q-12 -8 0 -16 q-2 -14 12 -12 q4 -8 12 -4z" fill="#fff" stroke="#BFD9EA" stroke-width="2"/></g>`
+      + popWord(d, .33, .7, 100, 26, 'SPLAT!', 34) + popWord(d, .76, .94, 100, 26, 'Brrr!', 30),
+    pivot: A('rotate', [[0, '0'], [.32, '0'], [.36, '-12'], [.5, '-12'], [.56, '0'], [1, '0']], d) + shake(d, .7, .86, 6),
+  }) },
+  disco: { dur: 3.8, sfx: 'disco', build: d => {
+    const cols = ['#FF5D73', '#FFD23F', '#4FA8F0', '#5DCB6A', '#B794F6', '#FF8A3D'];
+    let spots = '';
+    [[40, 60], [160, 70], [60, 150], [150, 150], [100, 110], [30, 110]].forEach(([x, y], i) => {
+      const p = [[0, '0']]; for (let t = .12 + i * .02, on = 1; t < .9; t += .08, on = 1 - on) p.push([+t.toFixed(2), on ? '.55' : '0']); p.push([.92, '0'], [1, '0']);
+      spots += `<circle cx="${x}" cy="${y}" r="26" fill="${cols[i]}">${AN('opacity', p, d)}</circle>`;
+    });
+    const ball = `<path d="M0 -60 V-16" stroke="#888" stroke-width="2"/><circle r="16" fill="#C9D3DE" stroke="#8A97A6" stroke-width="2"/><path d="M-16 0 H16 M-12 -9 H12 M-12 9 H12 M0 -16 V16 M-8 -14 V14 M8 -14 V14" stroke="#8A97A6" stroke-width="1.2"/><circle cx="-5" cy="-6" r="3" fill="#fff"/>`;
+    const moves = [[0, '0 0'], [.15, '0 0']]; for (let t = .2, s = 1; t < .85; t += .1, s = -s) moves.push([+t.toFixed(2), `${s * 14} ${-10}`], [+(t + .05).toFixed(2), '0 0']); moves.push([.9, '0 0'], [1, '0 0']);
+    return {
+      back: `<g>${AN('opacity', [[0, '0'], [.08, '1'], [.9, '1'], [1, '0']], d)}<rect width="200" height="200" fill="#2A2140" opacity=".75"/>${spots}</g>`,
+      front: at(100, 30, A('translate', [[0, '0 -80'], [.12, '0 0'], [.88, '0 0'], [1, '0 -80']], d) + `<g>${A('rotate', [[0, '0'], [1, '360']], d)}${ball}</g>`),
+      pivot: A('translate', moves, d) + A('rotate', [[0, '0'], [.2, '0'], [.3, '-10'], [.4, '10'], [.5, '-10'], [.6, '10'], [.7, '-10'], [.8, '10'], [.9, '0'], [1, '0']], d),
+    };
+  }},
+  /* ---------- frog ---------- */
+  pond: { dur: 3.6, sfx: 'pond', build: d => {
+    let drops = '';
+    for (let i = 0; i < 8; i++) { const dx = -48 + i * 14; drops += `<circle r="4" fill="#7FC8F0">${A('translate', [[0, '100 176'], [.5, '100 176'], [.62, `${100 + dx * .6} 120`], [.74, `${100 + dx} 180`], [1, `${100 + dx} 180`]], d)}${AN('opacity', [[0, '0'], [.5, '0'], [.51, '1'], [.72, '1'], [.74, '0'], [1, '0']], d)}</circle>`; }
+    const ring = (t) => `<ellipse cx="100" cy="176" rx="10" ry="3" fill="none" stroke="#fff" stroke-width="2">${AN('rx', [[0, '10'], [t, '10'], [t + .2, '60'], [1, '60']], d)}${AN('ry', [[0, '3'], [t, '3'], [t + .2, '12'], [1, '12']], d)}${AN('opacity', [[0, '0'], [t, '0'], [t + .01, '1'], [t + .2, '0'], [1, '0']], d)}</ellipse>`;
+    return {
+      back: `<g>${AN('opacity', [[0, '0'], [.08, '1'], [.9, '1'], [1, '0']], d)}<ellipse cx="100" cy="178" rx="92" ry="20" fill="#4FA8F0"/><ellipse cx="44" cy="174" rx="16" ry="5" fill="#3E8A22"/><ellipse cx="160" cy="180" rx="14" ry="4.5" fill="#3E8A22"/><circle cx="48" cy="170" r="4" fill="#FF8FC8"/></g>`,
+      front: drops + ring(.5) + ring(.6) + popWord(d, .5, .76, 100, 30, 'SPLASH!', 34),
+      pivot: A('translate', [[0, '0 0'], [.12, '0 6'], [.3, '0 -70'], [.48, '0 40'], [.8, '0 40'], [.86, '0 -30'], [.94, '0 0'], [1, '0 0']], d)
+        + A('rotate', [[0, '0 0 -80'], [.3, '0 0 -80'], [.42, '180 0 -80'], [.79, '180 0 -80'], [.8, '0 0 -80'], [1, '0 0 -80']], d)
+        + AN('opacity', [[0, '1'], [.46, '1'], [.5, '0'], [.8, '0'], [.84, '1'], [1, '1']], d),
+    };
+  }},
+  croak: { dur: 2.8, sfx: 'croak', build: d => ({
+    front: at(100, 132, A('scale', [[0, '0'], [.15, '0'], [.25, '1'], [.32, '.4'], [.42, '1.2'], [.5, '.4'], [.62, '1.5'], [.75, '0'], [1, '0']], d) + `<ellipse rx="22" ry="16" fill="#FFB3C7" stroke="#E58BB4" stroke-width="2"/>`)
+      + popWord(d, .6, .9, 100, 30, 'RIBBIT!', 34),
+    pivot: A('scale', [[0, '1 1'], [.6, '1 1'], [.66, '1.08 .92'], [.74, '1 1'], [1, '1 1']], d),
+  }) },
+  /* ---------- elephant ---------- */
+  mouse: { dur: 3.6, sfx: 'eek', build: d => {
+    const m = `<ellipse rx="10" ry="7" fill="#9AA0A8"/><circle cx="-8" cy="-6" r="4.5" fill="#B5BBC3"/><circle cx="-8" cy="-6" r="2.5" fill="#F2B8C6"/><circle cx="-12" cy="-1" r="1.4" fill="${D}"/><circle cx="-15" cy="1" r="1.6" fill="#F2B8C6"/><path d="M9 2 q12 2 14 -8" stroke="#9AA0A8" stroke-width="2" fill="none"/>`;
+    return {
+      front: `<g>${A('translate', [[0, '230 182'], [.25, '150 182'], [.6, '150 182'], [.85, '-40 182'], [1, '-40 182']], d)}${A('translate', [[0, '0 0'], [.1, '0 -2'], [.2, '0 0'], [.6, '0 0'], [.65, '0 -2'], [.7, '0 0'], [1, '0 0']], d)}${m}</g>`
+        + popWord(d, .3, .7, 100, 26, 'EEK!', 40),
+      pivot: A('translate', [[0, '0 0'], [.28, '0 0'], [.36, '-20 -50'], [.7, '-20 -50'], [.82, '0 0'], [1, '0 0']], d) + shake(d, .36, .7, 4),
+    };
+  }},
+  peanut: eat('peanut'),
+  /* ---------- octopus ---------- */
+  ink: { dur: 3.6, sfx: 'poof', build: d => {
+    const puffs = [[100, 100, 40], [70, 80, 30], [130, 84, 32], [80, 130, 30], [124, 130, 34], [100, 60, 26]].map(([x, y, r], i) =>
+      at(x, y, A('scale', [[0, '0'], [.15 + i * .02, '0'], [.3 + i * .02, '1'], [.5, '1.1'], [.66, '0'], [1, '0']], d) + `<circle r="${r}" fill="#3B2A5C" opacity=".92"/>`)).join('');
+    return {
+      front: puffs + at(40, 70, A('scale', [[0, '0'], [.62, '0'], [.68, '1.2'], [.74, '1'], [.86, '1'], [.9, '0'], [1, '0']], d) + `<text text-anchor="middle" style="font: 20px 'Lilita One', 'Lilita Local', sans-serif; fill: ${D}; stroke: #fff; stroke-width: 5px; paint-order: stroke;">Peekaboo!</text>`),
+      pivot: A('translate', [[0, '0 0'], [.4, '0 0'], [.41, '-60 0'], [.8, '-60 0'], [.95, '0 0'], [1, '0 0']], d)
+        + A('scale', [[0, '1'], [.4, '1'], [.41, '.7'], [.8, '.7'], [.95, '1'], [1, '1']], d)
+        + AN('opacity', [[0, '1'], [.32, '1'], [.36, '0'], [.58, '0'], [.62, '1'], [1, '1']], d),
+    };
+  }},
+  drums: { dur: 3.4, sfx: 'drums', build: d => {
+    const hit = (x, y, inner, t0) => { const p = [[0, '1 1']]; for (let t = t0; t < .85; t += .12) p.push([+t.toFixed(2), '1 1'], [+(t + .03).toFixed(2), '1.12 .88'], [+(t + .06).toFixed(2), '1 1']); p.push([1, '1 1']); return at(x, y, A('scale', p, d) + inner); };
+    return {
+      front: `<g>${AN('opacity', [[0, '0'], [.06, '1'], [.92, '1'], [1, '0']], d)}`
+        + hit(100, 168, `<circle r="26" fill="#FF5D73" stroke="${D}" stroke-width="3"/><circle r="17" fill="#FFF8F0"/><path d="M-26 0 H26" stroke="${D}" stroke-width="1.5"/>`, .14)
+        + hit(52, 150, `<ellipse rx="20" ry="8" fill="#FFF8F0" stroke="${D}" stroke-width="2.5"/><rect x="-20" y="0" width="40" height="14" fill="#FF5D73" stroke="${D}" stroke-width="2.5"/>`, .2)
+        + hit(148, 150, `<ellipse rx="20" ry="8" fill="#FFF8F0" stroke="${D}" stroke-width="2.5"/><rect x="-20" y="0" width="40" height="14" fill="#FF5D73" stroke="${D}" stroke-width="2.5"/>`, .26)
+        + `<g transform="translate(168 100)"><g>${A('rotate', [[0, '0'], [.72, '0'], [.76, '-18'], [.84, '10'], [.9, '0'], [1, '0']], d)}<path d="M0 10 V50" stroke="#888" stroke-width="3"/><ellipse rx="22" ry="5" fill="#FFD23F" stroke="#D9A400" stroke-width="2"/></g></g></g>`
+        + popWord(d, .76, .94, 100, 26, 'CRASH!', 30),
+      pivot: A('translate', [[0, '0 0'], [.12, '0 -10'], [1, '0 -10']], d),
+    };
+  }},
+  /* ---------- unicorn ---------- */
+  cupcake: eat('cupcake'),
+  twinkle: { dur: 3.2, sfx: 'sparkle', build: d => ({
+    front: starBurst(d, 100, 6) + sparkles(d, .3, 1),
+    pivot: A('rotate', [[0, '0'], [.12, '-10'], [.6, '-10'], [.75, '0'], [1, '0']], d) + A('translate', [[0, '0 0'], [.12, '0 -24'], [.6, '0 -24'], [.75, '0 0'], [1, '0 0']], d),
+  }) },
+  /* ---------- dragon ---------- */
+  treasure: { dur: 3.6, sfx: 'coins', build: d => {
+    let coins = '';
+    [[40, 186], [56, 180], [72, 186], [128, 186], [144, 180], [160, 186], [50, 172], [150, 172], [64, 168], [136, 168], [30, 180], [170, 180]].forEach(([x, y]) => { coins += `<ellipse cx="${x}" cy="${y}" rx="11" ry="6" fill="#FFD23F" stroke="#D9A400" stroke-width="2"/>`; });
+    return {
+      front: `<g>${AN('opacity', [[0, '0'], [.08, '1'], [.92, '1'], [1, '0']], d)}${coins}
+        <g transform="translate(30 150)"><rect x="-16" y="-4" width="32" height="20" rx="3" fill="#9C6B4A" stroke="#6B4423" stroke-width="2"/><path d="M-16 -4 q16 -16 32 0z" fill="#B97A3A" stroke="#6B4423" stroke-width="2"/><circle cx="0" cy="-12" r="3" fill="#FF5D73"/></g>
+        <circle cx="172" cy="150" r="6" fill="#4FA8F0" stroke="#fff" stroke-width="1.5"/></g>`
+        + `<g>${A('translate', [[0, '100 170'], [.4, '100 170'], [.55, '120 40'], [.7, '150 170'], [1, '150 170']], d)}<g>${A('scale', [[0, '1 1'], [.42, '.2 1'], [.46, '1 1'], [.5, '.2 1'], [.54, '1 1'], [.58, '.2 1'], [.62, '1 1'], [1, '1 1']], d)}<circle r="7" fill="#FFD23F" stroke="#D9A400" stroke-width="2"/></g>${AN('opacity', [[0, '0'], [.4, '0'], [.41, '1'], [.88, '1'], [.9, '0'], [1, '0']], d)}</g>`
+        + sparkles(d, .15, .95) + popWord(d, .2, .6, 100, 30, 'MINE!', 36) + heart(d, 70, 50, .7),
+      pivot: A('scale', [[0, '1 1'], [.2, '1.1 .9'], [.3, '1 1'], [.4, '1.1 .9'], [.5, '1 1'], [1, '1 1']], d),
+    };
+  }},
+  marshmallow: { dur: 3.8, sfx: 'marsh', build: (d, a) => {
+    const [mx, my] = a.mouth;
+    return {
+      front: `<g>${A('translate', [[0, '200 96'], [.15, '136 96'], [.58, '136 96'], [.7, `${mx + 6} ${my - 6}`], [.86, `${mx + 6} ${my - 6}`], [1, '240 96']], d)}
+          <path d="M8 4 L70 46" stroke="#9C6B4A" stroke-width="4" stroke-linecap="round"/>
+          <rect x="-8" y="-8" width="18" height="15" rx="6" stroke="#E8DCC8" stroke-width="2">${AN('fill', [[0, '#FFFFFF'], [.3, '#FFFFFF'], [.5, '#E0A15A'], [1, '#E0A15A']], d)}${AN('opacity', [[0, '1'], [.74, '1'], [.76, '0'], [1, '0']], d)}</rect></g>`
+        + `<g transform="translate(104 108) rotate(-10)"><g>${A('scale', [[0, '0'], [.26, '0'], [.32, '.5'], [.4, '.42'], [.46, '.5'], [.5, '0'], [1, '0']], d)}<path d="M0 0 C18 -16 46 -12 72 -26 C60 -6 78 4 86 18 C56 12 28 18 0 0z" fill="#FF7A2F"/><path d="M6 0 C20 -8 38 -6 56 -12 C46 -2 56 4 62 10 C40 8 22 10 6 0z" fill="#FFD23F"/></g></g>`
+        + heart(d, 150, 46, .8) + popWord(d, .8, .95, 100, 30, 'Yum!', 30),
+      pivot: A('scale', [[0, '1 1'], [.74, '1 1'], [.78, '1.07 .92'], [.82, '1 1'], [1, '1 1']], d),
+    };
+  }},
+  /* ---------- hobbit ---------- */
+  mushroom: eat('mushroom'),
+  /* ---------- dinosaur ---------- */
+  egg: { dur: 4.2, sfx: 'hatch', build: d => {
+    const wob = [[0, '0']]; for (let t = .1, s = 1; t < .45; t += .05, s = -s) wob.push([+t.toFixed(2), `${s * 12}`]); wob.push([.48, '0'], [1, '0']);
+    return {
+      front: `<g transform="translate(152 184)">${AN('opacity', [[0, '0'], [.06, '1'], [.92, '1'], [1, '0']], d)}<g>${A('rotate', wob, d)}
+          <g>${AN('opacity', [[0, '0'], [.54, '0'], [.56, '1'], [1, '1']], d)}${A('translate', [[0, '0 10'], [.56, '0 10'], [.64, '0 -4'], [1, '0 -4']], d)}<circle cx="0" cy="-30" r="12" fill="#7ED957"/><circle cx="-4" cy="-32" r="2.2" fill="${D}"/><circle cx="5" cy="-32" r="2.2" fill="${D}"/><path d="M-4 -25 q4 3 8 0" stroke="${D}" stroke-width="1.6" fill="none"/></g>
+          <path d="M-18 -16 Q-18 0 0 0 Q18 0 18 -16 L12 -22 L6 -16 L0 -22 L-6 -16 L-12 -22 Z" fill="#FFF8E6" stroke="#E5D3A8" stroke-width="2"/>
+          <g>${A('translate', [[0, '0 0'], [.52, '0 0'], [.62, '20 -40'], [.72, '40 10'], [1, '40 10']], d)}${A('rotate', [[0, '0'], [.52, '0'], [.72, '90'], [1, '90']], d)}${AN('opacity', [[0, '1'], [.7, '1'], [.74, '0'], [1, '0']], d)}
+            <path d="M-18 -16 Q-20 -48 0 -50 Q20 -48 18 -16 L12 -22 L6 -16 L0 -22 L-6 -16 L-12 -22 Z" fill="#FFF8E6" stroke="#E5D3A8" stroke-width="2"/><circle cx="-6" cy="-36" r="3" fill="#B5E5A0"/><circle cx="8" cy="-28" r="2.5" fill="#B5E5A0"/>
+            <path d="M-4 -46 l4 8 l-3 6 l4 6" stroke="#B9A06A" stroke-width="1.5" fill="none">${AN('opacity', [[0, '0'], [.4, '0'], [.42, '1'], [1, '1']], d)}</path></g>
+        </g></g>` + heart(d, 120, 60, .66) + heart(d, 170, 110, .74),
+      pivot: A('rotate', [[0, '0'], [.15, '0'], [.25, '10'], [.85, '10'], [1, '0']], d),
+    };
+  }},
+  /* ---------- monkey ---------- */
+  vine: { dur: 3.6, sfx: 'vine', build: d => ({
+    carry: `<path d="M100 50 V-160" stroke="#3E8A22" stroke-width="6" stroke-linecap="round"/><path d="M100 -20 q-12 -4 -14 -14 q12 2 14 14 M100 -80 q12 -4 14 -14 q-12 2 -14 14" fill="#5DBB3A"/>`,
+    pivot: A('translate', [[0, '0 0'], [.1, '0 -16'], [.9, '0 -16'], [1, '0 0']], d)
+      + A('rotate', [[0, '0 0 -230'], [.1, '0 0 -230'], [.25, '-16 0 -230'], [.42, '16 0 -230'], [.58, '-16 0 -230'], [.74, '16 0 -230'], [.9, '0 0 -230'], [1, '0 0 -230']], d)
+    ,
+    front: popWord(d, .3, .8, 100, 196, 'Ooh ooh aah!', 22),
+  }) },
+  coconut: { dur: 3.2, sfx: 'bonk', build: d => {
+    const stars = [0, 1, 2].map(i => { const th = i * 2 * Math.PI / 3, rx = 30, ry = 8, cx = 100, cy = 40, px = cx + rx * Math.cos(th), py = cy + ry * Math.sin(th), qx = cx - rx * Math.cos(th), qy = cy - ry * Math.sin(th);
+      return `<path d="${STAR}" fill="#FFD23F" transform="scale(.8)"><animateMotion path="M${px} ${py} A${rx} ${ry} 0 1 1 ${qx} ${qy} A${rx} ${ry} 0 1 1 ${px} ${py}" dur="${(d * .2).toFixed(2)}s" repeatCount="3" begin="indefinite" fill="freeze"/></path>`; }).join('');
+    return {
+      front: `<g>${A('translate', [[0, '100 -40'], [.25, '100 -40'], [.36, '100 40'], [.5, '170 0'], [.66, '230 190'], [1, '230 190']], d)}<g>${A('rotate', [[0, '0'], [.36, '0'], [.66, '400'], [1, '400']], d)}<circle r="13" fill="#7A4A26"/><circle cx="-4" cy="-4" r="2" fill="#3E2614"/><circle cx="4" cy="-4" r="2" fill="#3E2614"/><circle cy="3" r="2" fill="#3E2614"/></g></g>`
+        + `<g>${AN('opacity', [[0, '0'], [.36, '0'], [.37, '1'], [.92, '1'], [.96, '0'], [1, '0']], d)}${stars}</g>` + popWord(d, .36, .7, 160, 80, 'BONK!', 30),
+      pivot: A('scale', [[0, '1 1'], [.35, '1 1'], [.38, '1.12 .82'], [.5, '1 1'], [1, '1 1']], d) + A('rotate', [[0, '0'], [.5, '0'], [.58, '-6'], [.66, '6'], [.74, '-6'], [.82, '6'], [.9, '0'], [1, '0']], d),
+    };
+  }},
+  /* ---------- bunny ---------- */
+  hole: { dur: 3.6, sfx: 'dig', build: d => {
+    let dirt = '';
+    for (let i = 0; i < 10; i++) { const dx = -60 + i * 13, s = .2 + (i % 4) * .03; dirt += `<circle r="${3 + i % 3}" fill="#8C6A3B">${A('translate', [[0, '100 182'], [s, '100 182'], [s + .1, `${100 + dx * .6} 120`], [s + .2, `${100 + dx} 186`], [1, `${100 + dx} 186`]], d)}${AN('opacity', [[0, '0'], [s, '0'], [s + .01, '1'], [s + .2, '1'], [s + .3, '0'], [1, '0']], d)}</circle>`; }
+    return {
+      back: `<g>${AN('opacity', [[0, '0'], [.08, '1'], [.92, '1'], [1, '0']], d)}<ellipse cx="100" cy="184" rx="44" ry="10" fill="#3A2615"/><ellipse cx="100" cy="182" rx="50" ry="9" fill="none" stroke="#8C6A3B" stroke-width="4"/></g>`,
+      front: dirt + popWord(d, .62, .9, 100, 30, 'BOING!', 34),
+      pivot: A('translate', [[0, '0 0'], [.15, '0 -30'], [.35, '0 70'], [.6, '0 70'], [.72, '0 -60'], [.84, '0 0'], [1, '0 0']], d)
+        + AN('opacity', [[0, '1'], [.27, '1'], [.33, '0'], [.61, '0'], [.63, '1'], [1, '1']], d)
+        + A('scale', [[0, '1 1'], [.25, '.8 1.2'], [.6, '.8 1.2'], [.72, '.9 1.1'], [.84, '1.12 .88'], [.9, '1 1'], [1, '1 1']], d),
+    };
+  }},
+  hat: { dur: 3.6, sfx: 'tada', build: d => ({
+    front: `<g>${AN('opacity', [[0, '0'], [.06, '1'], [.8, '1'], [.9, '0'], [1, '0']], d)}<rect x="62" y="132" width="76" height="52" rx="4" fill="#1E1E1E"/><rect x="62" y="166" width="76" height="9" fill="#C9473D"/><ellipse cx="100" cy="186" rx="56" ry="8" fill="#1E1E1E"/><ellipse cx="100" cy="132" rx="38" ry="6" fill="#333"/></g>`
+      + `<g>${A('translate', [[0, '170 92'], [.12, '150 92'], [.22, '150 92'], [.28, '150 100'], [.34, '150 92'], [.8, '150 92'], [1, '240 92']], d)}<path d="M0 0 L-30 30" stroke="#1E1E1E" stroke-width="5" stroke-linecap="round"/><path d="M-26 26 L-32 32" stroke="#fff" stroke-width="5" stroke-linecap="round"/></g>`
+      + starBurst(d, 100, 120, .3) + popWord(d, .45, .88, 100, 26, 'TA-DA!', 36),
+    pivot: A('translate', [[0, '0 10'], [.32, '0 10'], [.45, '0 -30'], [.55, '0 0'], [1, '0 0']], d) + A('scale', [[0, '.2'], [.32, '.2'], [.45, '1'], [1, '1']], d)
+      + AN('opacity', [[0, '0'], [.31, '0'], [.33, '1'], [1, '1']], d),
+  }) },
+  /* ---------- robot ---------- */
+  oil: eat('oilcan'),
+  /* ---------- bjork ---------- */
+  box: { dur: 3.8, sfx: 'box', build: d => ({
+    front: `<g>${AN('opacity', [[0, '0'], [.08, '1'], [.9, '1'], [1, '0']], d)}<path d="M44 128 L30 108 L70 112 Z M156 128 L170 108 L130 112 Z" fill="#C79A5E" stroke="#8C6A3B" stroke-width="2"/><rect x="44" y="128" width="112" height="60" fill="#D4A86A" stroke="#8C6A3B" stroke-width="2.5"/><path d="M60 150 h40" stroke="#8C6A3B" stroke-width="2"/><text x="128" y="164" text-anchor="middle" style="font: 13px 'Lilita One', 'Lilita Local', sans-serif; fill: #8C6A3B;">FRAGILE</text></g>`
+      + popWord(d, .5, .9, 100, 26, 'I fits, I sits!', 24),
+    pivot: A('translate', [[0, '0 0'], [.15, '0 0'], [.3, '0 -70'], [.45, '0 40'], [.5, '0 30'], [.9, '0 30'], [1, '0 0']], d)
+      + A('scale', [[0, '1 1'], [.12, '1.1 .88'], [.2, '1 1'], [.45, '1 1'], [.5, '1.1 .9'], [.56, '1 1'], [1, '1 1']], d),
+  }) },
+  laser: { dur: 3.8, sfx: 'pounce', build: d => {
+    const spots = [[0, '40 170'], [.18, '160 160'], [.34, '50 120'], [.5, '150 176'], [.66, '70 178'], [.8, '120 170'], [1, '120 170']];
+    const follow = spots.map(([t, v]) => { const x = +v.split(' ')[0]; return [t, `${Math.round((x - 100) * .45)} 0`]; });
+    return {
+      front: `<g>${A('translate', spots, d)}${AN('opacity', [[0, '0'], [.04, '1'], [.82, '1'], [.84, '0'], [1, '0']], d)}<circle r="9" fill="#FF2D2D" opacity=".35"/><circle r="4" fill="#FF2D2D"/></g>` + popWord(d, .82, .95, 100, 30, 'GOT IT!', 30),
+      pivot: A('translate', follow.map(([t, v]) => [t, v]).slice(0, -1).concat([[.8, '9 0'], [.86, '9 -40'], [.92, '9 0'], [1, '0 0']]).filter((p, i, arr) => i === 0 || p[0] > arr[i - 1][0]), d)
+        + A('rotate', [[0, '0'], [.18, '8'], [.34, '-8'], [.5, '8'], [.66, '-8'], [.8, '0'], [1, '0']], d),
+    };
+  }},
+  /* ---------- mermaid ---------- */
+  dolphin: { dur: 3.4, sfx: 'dolphin', build: d => ({
+    back: `<g>${AN('opacity', [[0, '0'], [.08, '1'], [.92, '1'], [1, '0']], d)}<path d="M0 160 Q25 150 50 160 T100 160 T150 160 T200 160 V200 H0 Z" fill="#4FA8F0" opacity=".85"/></g>`,
+    front: `<g>${AN('opacity', [[0, '0'], [.12, '0'], [.14, '1'], [.84, '1'], [.86, '0'], [1, '0']], d)}<g><animateMotion path="M10 170 Q100 -80 190 170" rotate="auto" dur="${(d * .72).toFixed(2)}s" begin="indefinite" fill="freeze"/>
+      <g transform="scale(1.5)"><path d="M-26 0 Q-10 -14 18 -6 Q28 -2 32 2 Q20 6 10 8 Q-10 12 -26 0z" fill="#7FA7C9"/><path d="M-26 0 l-10 -10 l2 12 l-2 10z" fill="#6A92B4"/><path d="M0 -8 l6 -10 l6 8z" fill="#6A92B4"/><path d="M-6 4 Q8 10 24 4" fill="#DCE8F2"/><circle cx="18" cy="-2" r="2" fill="${D}"/></g></g></g>`
+      + popWord(d, .4, .8, 100, 196, 'Eee-eee!', 22),
+    pivot: A('rotate', [[0, '0'], [.2, '-8'], [.4, '8'], [.6, '-8'], [.8, '8'], [1, '0']], d),
+  }) },
+  sing: { dur: 3.4, sfx: 'sing', build: (d, a) => {
+    const [mx, my] = a.mouth;
+    const note = (k) => k % 2 ? `<circle r="5" fill="#B794F6"/><path d="M4.5 0 V-20 q8 4 6 12" stroke="#B794F6" stroke-width="2.5" fill="none"/>` : `<circle cx="-8" r="4.5" fill="#FF8FC8"/><circle cx="8" cy="-4" r="4.5" fill="#FF8FC8"/><path d="M-4 0 V-20 L12 -24 V-4" stroke="#FF8FC8" stroke-width="2.5" fill="none"/>`;
+    let notes = '';
+    for (let i = 0; i < 6; i++) { const s = .1 + i * .11, dx = (i % 2 ? 1 : -1) * (30 + i * 6); notes += `<g>${A('translate', [[0, `${mx} ${my}`], [s, `${mx} ${my}`], [s + .3, `${mx + dx} ${my - 80}`], [1, `${mx + dx} ${my - 80}`]], d)}${AN('opacity', [[0, '0'], [s, '0'], [s + .02, '1'], [s + .26, '1'], [s + .3, '0'], [1, '0']], d)}${note(i)}</g>`; }
+    return { front: notes, pivot: A('rotate', [[0, '0'], [.2, '-6'], [.4, '6'], [.6, '-6'], [.8, '6'], [1, '0']], d) };
+  }},
+  /* ---------- shark ---------- */
+  surf: { dur: 3.6, sfx: 'surf', build: d => ({
+    back: `<g>${AN('opacity', [[0, '0'], [.08, '1'], [.92, '1'], [1, '0']], d)}<path d="M-10 200 V150 Q40 120 80 150 Q120 176 160 140 Q190 110 210 130 V200 Z" fill="#4FA8F0"/><path d="M-10 150 Q40 120 80 150 Q120 176 160 140 Q190 110 210 130" stroke="#fff" stroke-width="5" fill="none" stroke-dasharray="10 8"/></g>`,
+    carry: `<ellipse cx="100" cy="192" rx="62" ry="9" fill="#FFD23F" stroke="#D9A400" stroke-width="3"/><path d="M50 192 H150" stroke="#FF5D73" stroke-width="3"/>`,
+    pivot: A('translate', [[0, '0 0'], [.15, '-40 -10'], [.35, '0 -30'], [.55, '40 -10'], [.75, '0 -30'], [.9, '0 0'], [1, '0 0']], d)
+      + A('rotate', [[0, '0'], [.15, '-10'], [.35, '8'], [.55, '-10'], [.75, '8'], [.9, '0'], [1, '0']], d),
+    front: popWord(d, .2, .86, 100, 26, "SURF'S UP!", 30),
+  }) },
+  /* ---------- fairy ---------- */
+  flowers: { dur: 3.6, sfx: 'bloom', build: d => {
+    const cols = ['#FF5D73', '#FFD23F', '#B794F6', '#4FA8F0', '#FF8FC8'];
+    const fl = [[28, .2], [56, .3], [148, .4], [176, .5], [100, .6]].map(([x, s], i) => {
+      const petals = [0, 72, 144, 216, 288].map(r => `<ellipse cx="0" cy="-7" rx="4.5" ry="7" fill="${cols[i]}" transform="rotate(${r})"/>`).join('');
+      return `<g transform="translate(${x} 188)"><g>${A('scale', [[0, '1 0'], [s, '1 0'], [s + .12, '1 1'], [1, '1 1']], d)}<path d="M0 0 V-34" stroke="#3E8A22" stroke-width="3"/><path d="M0 -14 q-10 -2 -12 -10 q10 0 12 10" fill="#5DBB3A"/></g>
+        <g transform="translate(0 -38)"><g>${A('scale', [[0, '0'], [s + .1, '0'], [s + .18, '1.2'], [s + .22, '1'], [1, '1']], d)}${petals}<circle r="4.5" fill="#FFF46B"/></g></g></g>`;
+    }).join('');
+    return {
+      front: `<g>${AN('opacity', [[0, '1'], [.9, '1'], [1, '0']], d)}${fl}</g>` + starBurst(d, 158, 54, .12),
+      pivot: A('rotate', [[0, '0'], [.12, '-8'], [.2, '4'], [.3, '-8'], [.4, '4'], [.5, '-8'], [.6, '0'], [1, '0']], d),
+    };
+  }},
   bellyup: { dur: 3.6, sfx: 'snore', build: d => ({
     pivot: A('translate', [[0, '0 0'], [.12, '0 -24'], [.25, '0 -8'], [.85, '0 -8'], [1, '0 0']], d)
       + A('rotate', [[0, '0 0 -80'], [.12, '0 0 -80'], [.25, '180 0 -80'], [.85, '180 0 -80'], [.97, '360 0 -80'], [1, '360 0 -80']], d)
@@ -1026,6 +1283,29 @@ const SFX = {
   peas: d => { const t = audio().currentTime; for (let i = 0; i < 6; i++) tone(700, t + d * (.24 + i * .1), .07, { type: 'square', vol: .08, to: 200 }); },
   headbop: d => { const t = audio().currentTime; [.3, .5].forEach(x => tone(140, t + d * x, .15, { vol: .35, to: 70 })); tone(32, t + d * .55, d * .35, { type: 'sawtooth', vol: .1, wobble: true, brass: true }); },
   fouram: d => { const t = audio().currentTime; [.16, .32, .46].forEach((x, i) => meow(t + d * x, 1 + i * .12, .25)); tone(2200, t + d * .71, .3, { type: 'triangle', vol: .15 }); [.78, .84, .9].forEach(x => tone(520, t + d * x, .08, { type: 'square', vol: .08, to: 160 })); },
+  royal: d => { const t = audio().currentTime + d * .22; [67, 72, 76, 79].forEach((m, i) => tone(mtof(m), t + i * .1, .25, { type: 'sawtooth', vol: .08, brass: true })); tone(mtof(84), t + .4, .8, { type: 'sawtooth', vol: .09, brass: true }); drum('c', t + .4); },
+  cool: d => { const t = audio().currentTime; noise(t, .4, 300, .25, 'bandpass', 2500); [60, 63, 65, 66, 67].forEach((m, i) => tone(mtof(m), t + d * .3 + i * .12, .2, { type: 'square', vol: .06 })); },
+  scrub: d => { const t = audio().currentTime; for (let i = 0; i < 14; i++) noise(t + d * .16 + i * d * .04, d * .035, 2500, .12, 'bandpass'); tone(mtof(88), t + d * .74, .4, { type: 'triangle', vol: .15 }); tone(mtof(93), t + d * .78, .5, { type: 'triangle', vol: .15 }); },
+  splat: d => { const t = audio().currentTime; noise(t + d * .15, d * .17, 600, .15, 'bandpass', 2000); noise(t + d * .32, .25, 900, .4, 'lowpass', 200); tone(400, t + d * .76, .4, { vol: .12, wobble: true, to: 200 }); },
+  disco: d => { const t = audio().currentTime; noise(t, .5, 200, .2, 'bandpass', 4000); for (let i = 0; i < 10; i++) noise(t + d * .15 + i * d * .07, .05, 8000, .08); },
+  pond: d => { const t = audio().currentTime; tone(200, t + d * .15, .3, { vol: .25, to: 700 }); noise(t + d * .5, .5, 1500, .4, 'bandpass', 400); tone(300, t + d * .86, .2, { vol: .2, to: 800 }); },
+  croak: d => { const t = audio().currentTime; [.25, .42, .62].forEach(x => tone(90, t + d * x, .25, { type: 'sawtooth', vol: .18, to: 70, brass: true })); },
+  eek: d => { const t = audio().currentTime; for (let i = 0; i < 4; i++) tone(2400, t + d * .1 + i * .12, .05, { vol: .1, to: 3000 }); tone(300, t + d * .3, .7, { type: 'sawtooth', vol: .15, to: 900, brass: true }); },
+  poof: d => { const t = audio().currentTime; noise(t + d * .15, .6, 300, .35, 'lowpass', 1200); tone(500, t + d * .62, .2, { vol: .2, to: 1200 }); },
+  drums: d => { const t = audio().currentTime; for (let i = 0; i < 6; i++) { drum('k', t + d * (.14 + i * .12)); drum('t', t + d * (.2 + i * .12)); } drum('s', t + d * .7); noise(t + d * .76, 1, 5000, .25); },
+  coins: d => { const t = audio().currentTime; for (let i = 0; i < 8; i++) tone(2000 + i * 150, t + d * .1 + i * .08, .15, { type: 'triangle', vol: .08 }); tone(1800, t + d * .42, .3, { type: 'triangle', vol: .12 }); },
+  marsh: d => { const t = audio().currentTime; noise(t + d * .26, d * .24, 300, .3, 'lowpass', 1200); [.76, .8].forEach(x => tone(520, t + d * x, .08, { type: 'square', vol: .08, to: 160 })); },
+  hatch: d => { const t = audio().currentTime; for (let i = 0; i < 6; i++) tone(300, t + d * (.1 + i * .06), .05, { type: 'square', vol: .08 }); noise(t + d * .5, .2, 3000, .3, 'bandpass'); [0, .15].forEach(x => tone(1600, t + d * .58 + x, .12, { vol: .15, to: 2200 })); },
+  vine: d => { const t = audio().currentTime; [.25, .42, .58, .74].forEach(x => noise(t + d * x - .1, .3, 400, .2, 'bandpass', 2000)); [[.3, 500], [.4, 500], [.5, 700]].forEach(([x, f]) => tone(f, t + d * x, .2, { vol: .15, to: f * 1.4 })); },
+  bonk: d => { const t = audio().currentTime; tone(600, t + d * .36, .15, { type: 'square', vol: .12, to: 250 }); for (let i = 0; i < 6; i++) tone(2600, t + d * .45 + i * .14, .06, { vol: .08, to: 3400 }); },
+  dig: d => { const t = audio().currentTime; for (let i = 0; i < 5; i++) noise(t + d * .2 + i * .1, .08, 500, .25, 'lowpass'); tone(200, t + d * .65, .3, { vol: .3, to: 800 }); },
+  tada: d => { const t = audio().currentTime + d * .3; [72, 76, 79].forEach((m, i) => tone(mtof(m), t + i * .08, .2, { type: 'triangle', vol: .14 })); [72, 76, 79, 84].forEach(m => tone(mtof(m), t + .3, .9, { type: 'triangle', vol: .1 })); drum('c', t + .3); },
+  box: d => { const t = audio().currentTime; tone(200, t + d * .15, .3, { vol: .25, to: 600 }); tone(100, t + d * .45, .2, { vol: .4, to: 50 }); noise(t + d * .45, .15, 600, .2, 'lowpass'); },
+  pounce: d => { const t = audio().currentTime; for (let i = 0; i < 5; i++) noise(t + d * (.1 + i * .16), .06, 4000, .1); tone(250, t + d * .82, .3, { vol: .3, to: 900 }); },
+  dolphin: d => { const t = audio().currentTime; noise(t + d * .12, .4, 1500, .3, 'bandpass', 500); for (let i = 0; i < 5; i++) tone(1800, t + d * .4 + i * .07, .06, { vol: .1, to: 2600 }); noise(t + d * .84, .4, 1500, .3, 'bandpass', 500); },
+  sing: d => { const t = audio().currentTime; [76, 79, 81, 79, 84, 83].forEach((m, i) => tone(mtof(m), t + d * .1 + i * d * .11, d * .1, { vol: .14, wobble: true })); },
+  surf: d => { const t = audio().currentTime; noise(t, d * .9, 600, .18, 'bandpass', 1400); },
+  bloom: d => { const t = audio().currentTime; [.32, .42, .52, .62, .72].forEach((x, i) => tone(mtof(79 + i * 2), t + d * x, .2, { vol: .14, to: mtof(84 + i * 2) })); },
   snore: d => { const t = audio().currentTime; [.3, .55, .8].forEach(x => { tone(70, t + d * x, .5, { type: 'sawtooth', vol: .1, to: 55, brass: true }); noise(t + d * x, .5, 400, .12, 'lowpass', 200); }); },
   typing: d => { const t = audio().currentTime + d * .28; for (let i = 0; i < 16; i++) noise(t + i * .09 + Math.random() * .04, .025, 3000, .25, 'bandpass'); },
   door: d => { const t = audio().currentTime; tone(110, t + d * .45, .25, { vol: .5, to: 50 }); noise(t + d * .45, .1, 800, .2, 'lowpass'); tone(300, t + d * .79, .3, { vol: .25, to: 900 }); },
@@ -1047,7 +1327,7 @@ function fanfare() {
 /* ======================================================================
    APP
    ====================================================================== */
-const TOTAL = 30000, TRICK_AT = [10000, 20000];
+const TOTAL = 30000, TRICK_AT = [7000, 15000, 23000];
 const CHEERS = ['Super brushing!', 'Sparkly teeth!', 'You\'re a brushing star!', 'Wow, so shiny!', 'Brilliant job!', 'Keep it up!', 'Teeth twinkling!', 'Brush brush brush!', 'Amazing!'];
 const LAST_CHEERS = ['Nearly done!', 'Almost there!', 'Last little bit!', 'So close!'];
 const $ = id => document.getElementById(id);
